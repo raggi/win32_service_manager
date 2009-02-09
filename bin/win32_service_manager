@@ -12,9 +12,11 @@ def help
       - stop
       - delete
       - status
+      - list
     
     Create takes 3 arguments, name, command and description.
     All other commands take a single argument, the name of the service.
+    The list command takes no further arguments
   EOHELP
 end
 
@@ -33,6 +35,8 @@ when /delete/
   Win32ServiceManager.new.delete(ARGV.shift)
 when /status/
   Win32ServiceManager.new.status(ARGV.shift)
+when /list/
+  Win32ServiceManager.new.list
 else
   help
 end
