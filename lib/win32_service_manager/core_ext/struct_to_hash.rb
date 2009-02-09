@@ -12,7 +12,7 @@ class Struct
         hashable!
         vals = []
         each_pair{|k,v| vals << k; vals << v}
-        Hash[vals]
+        Hash[*vals]
       end
     end
 
@@ -41,10 +41,12 @@ if __FILE__ == $0
   TESTS = 10_000
   Benchmark.bmbm do |results|
     ABC = Struct.new(:a,:b,:c)
-    a = ABC.new(1,2,3)
-    a.extend Struct::ToHash::Ruby187
-    results.report("new:") { TESTS.times { a.to_hash } }
-    b = a.dup
+    if RUBY_VERSION >= '1.8.7'
+      a = ABC.new(1,2,3)
+      a.extend Struct::ToHash::Ruby187
+      results.report("new:") { TESTS.times { a.to_hash } }
+    end
+    b = ABC.new(1,2,3)
     b.extend Struct::ToHash::RubyOld
     results.report("old:") { TESTS.times { b.to_hash } }
   end
@@ -81,7 +83,9 @@ if __FILE__ == $0
     end
   end
 
-  [Struct::ToHash::Ruby187, Struct::ToHash::RubyOld].each do |mod|
+  supported_versions = [Struct::ToHash::RubyOld]
+  supported_versions << Struct::ToHash::Ruby187 if RUBY_VERSION >= '1.8.7'
+  supported_versions.each do |mod|
     describe mod do
       should 'raise an argument error when the struct has duplicate keys' do
         should.raise(ArgumentError) do
@@ -93,10 +97,10 @@ if __FILE__ == $0
       should 'return a hash with keys associated with their values' do
         keys = %w(a b c d e).map { |k| k.to_sym }
         values = [1,2,3,4,5]
-        result = Hash[keys.zip(values)]
+        result = Hash[*keys.zip(values).flatten]
         s = Struct.new(*keys).new(*values)
         s.extend mod
-        s.to_hash.should.eql result
+        s.to_hash.should.== result
       end
     end
   end
