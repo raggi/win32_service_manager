@@ -11,7 +11,7 @@ class Struct
       def to_hash
         hashable!
         vals = []
-        each_pair{|k,v| vals << [k,v]}
+        each_pair{|k,v| vals << k; vals << v}
         Hash[vals]
       end
     end
