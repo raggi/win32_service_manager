@@ -2,21 +2,19 @@ require 'win32_service_manager/core_ext/struct_to_hash'
 
 class Win32ServiceManager
 
-  VERSION = '0.1.0'
+  VERSION = '0.1.1'
   def self.version; VERSION; end
   def self.load_dependencies; require 'win32/service'; end
 
   # Construct a new service manager, just sets up a name_key, which is used
   # as a leading string to the name of all services managed by the instance.
-  # srv_any_path must be a full path to srvany.exe.
   def initialize(name_key = '')
     self.class.load_dependencies
     @name_key = name_key
   end
 
   # Create a new service. The service name will be appended to the name_key
-  # and inserted into the registry using Win32::Service. The arguments are 
-  # then adjusted with win32-registry.
+  # and inserted into the registry using Win32::Service.
   # One recommended pattern is to store persisence details about the service
   # as yaml in the optional description field.
   def create(name, command, args = '', description = nil, options = {})
@@ -40,21 +38,26 @@ class Win32ServiceManager
     Win32::Service.delete(n(name))
   end
 
+  # Schedule the service for start
   def start(name)
     Win32::Service.start(n(name))
   end
 
+  # Schedule the service for stop
   def stop(name)
     Win32::Service.stop(n(name))
   end
 
-  # Returns an array of tuples of name and description
+  # Returns an array of hashes derived from the Win32::Service::SvcInfo struct
+  # The optional argument will cut the array down to a single element for a 
+  # service with the given name.
   def status(name = nil)
     list = name ? services.select { |s| s.display_name == name } : services
     list.map { |svc_info| svc_info.to_hash }
   end
   alias_method :list, :status
 
+  # List all services that have names which start with the name_key.
   def services
     Win32::Service.services.select do |svc|
       # TODO in future, 1.8.7, can use start_with?
