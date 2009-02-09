@@ -17,7 +17,7 @@ class Win32ServiceManager
   # and inserted into the registry using Win32::Service.
   # One recommended pattern is to store persisence details about the service
   # as yaml in the optional description field.
-  def create(name, command, args = '', description = nil, options = {})
+  def create(name, command, description = nil, options = {})
     defaults = {
       :service_type       => Win32::Service::WIN32_OWN_PROCESS,
       :start_type         => Win32::Service::AUTO_START,

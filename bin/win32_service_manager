@@ -3,4 +3,36 @@
 require File.expand_path(
     File.join(File.dirname(__FILE__), '..', 'lib', 'win32_service_manager'))
 
-# Put your code here
+def help
+  abort <<-EOHELP
+  Usage: #{File.basename($0)}
+    Commands:
+      - create
+      - start
+      - stop
+      - delete
+      - status
+    
+    Create takes 3 arguments, name, command and description.
+    All other commands take a single argument, the name of the service.
+  EOHELP
+end
+
+case ARGV.shift
+when /create/
+  unless ARGV.size >= 2
+    puts "Need more for create: name, command, and optional description"
+    help
+  end
+  Win32ServiceManager.new.create(ARGV.shift, ARGV.shift, ARGV.shift)
+when /start/
+  Win32ServiceManager.new.start(ARGV.shift)
+when /stop/
+  Win32ServiceManager.new.stop(ARGV.shift)  
+when /delete/
+  Win32ServiceManager.new.delete(ARGV.shift)
+when /status/
+  Win32ServiceManager.new.status(ARGV.shift)
+else
+  help
+end
