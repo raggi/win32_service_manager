@@ -1,0 +1,59 @@
+= win32_service_manager
+    by James Tucker
+    http://ra66i.org
+    http://github.com/raggi/win32_service_manager
+    http://libraggi.rubyforge.org/win32_service_manager
+
+== DESCRIPTION:
+
+A simple wrapper around Win32::Service to present a more 'God' 
+(http://god.rubyforge.org) like interface. Also presents all service 
+information as hashes rather than structs to save on wire transport and 
+multi-platform complexity.
+
+== FEATURES/PROBLEMS:
+
+* Really heavily mocked out for testing, might need more integration tests.
+
+== SYNOPSIS:
+
+  sm = Win32ServiceManager.new('')
+  sm.status
+  sm.status('Abiosdsk')
+
+== REQUIREMENTS:
+
+At the time of writing, some of the dependencies are only available as gems to
+the 'x86-mswin32-60' platform. If you are installing on mingw, you can get
+away with installing them using a specific --platform argument to rubygems.
+
+* win32-service
+
+== INSTALL:
+
+* gem inst win32_service_manager
+
+== LICENSE:
+
+(The MIT License)
+
+Copyright (c) 2009 James Tucker
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
