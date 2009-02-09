@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'yaml'
 
 require File.expand_path(
     File.join(File.dirname(__FILE__), '..', 'lib', 'win32_service_manager'))
@@ -20,7 +21,7 @@ def help
   EOHELP
 end
 
-case ARGV.shift
+y case ARGV.shift
 when /create/
   unless ARGV.size >= 2
     puts "Need more for create: name, command, and optional description"
