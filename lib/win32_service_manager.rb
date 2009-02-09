@@ -2,7 +2,7 @@ require 'win32_service_manager/core_ext/struct_to_hash'
 
 class Win32ServiceManager
 
-  VERSION = '0.1.3'
+  VERSION = '0.1.0'
   def self.version; VERSION; end
   def self.load_dependencies; require 'win32/service'; end
 
