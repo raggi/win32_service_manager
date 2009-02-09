@@ -27,15 +27,16 @@ when /create/
     puts "Need more for create: name, command, and optional description"
     help
   end
-  Win32ServiceManager.new.create(ARGV.shift.dup, ARGV.shift.dup, ARGV.shift.dup)
+  args = [ARGV.shift, ARGV.shift, ARGV.shift].compact.map { |a| a.dup }
+  Win32ServiceManager.new.create(*args)
 when /start/
-  Win32ServiceManager.new.start(ARGV.shift.dup)
+  Win32ServiceManager.new.start(ARGV.shift)
 when /stop/
-  Win32ServiceManager.new.stop(ARGV.shift.dup)
+  Win32ServiceManager.new.stop(ARGV.shift)
 when /delete/
-  Win32ServiceManager.new.delete(ARGV.shift.dup)
+  Win32ServiceManager.new.delete(ARGV.shift)
 when /status/
-  Win32ServiceManager.new.status(ARGV.shift.dup)
+  Win32ServiceManager.new.status(ARGV.shift)
 when /list/
   Win32ServiceManager.new.list
 else
