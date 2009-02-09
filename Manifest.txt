@@ -4,6 +4,8 @@ README.rdoc
 Rakefile
 bin/win32_service_manager
 lib/win32_service_manager.rb
+lib/win32_service_manager/core_ext/struct_to_hash.rb
+spec/.bacon
 spec/helper.rb
 spec/runner
 spec/spec_win32_service_manager.rb

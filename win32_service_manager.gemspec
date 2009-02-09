@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{win32_service_manager}
-  s.version = "0.1.0"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["James Tucker"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email = %q{raggi@rubyforge.org}
   s.executables = ["win32_service_manager"]
   s.extra_rdoc_files = ["History.txt", "README.rdoc", "bin/win32_service_manager"]
-  s.files = ["History.txt", "Manifest.txt", "README.rdoc", "Rakefile", "bin/win32_service_manager", "lib/win32_service_manager.rb", "spec/helper.rb", "spec/runner", "spec/spec_win32_service_manager.rb", "tasks/autospec.rake", "tasks/bacon.rake", "tasks/bones.rake", "tasks/gem.rake", "tasks/git.rake", "tasks/manifest.rake", "tasks/notes.rake", "tasks/post_load.rake", "tasks/rdoc.rake", "tasks/rubyforge.rake", "tasks/setup.rb"]
+  s.files = ["History.txt", "Manifest.txt", "README.rdoc", "Rakefile", "bin/win32_service_manager", "lib/win32_service_manager.rb", "lib/win32_service_manager/core_ext/struct_to_hash.rb", "spec/.bacon", "spec/helper.rb", "spec/runner", "spec/spec_win32_service_manager.rb", "tasks/autospec.rake", "tasks/bacon.rake", "tasks/bones.rake", "tasks/gem.rake", "tasks/git.rake", "tasks/manifest.rake", "tasks/notes.rake", "tasks/post_load.rake", "tasks/rdoc.rake", "tasks/rubyforge.rake", "tasks/setup.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/raggi/win32_service_manager}
   s.rdoc_options = ["--main", "README.rdoc"]

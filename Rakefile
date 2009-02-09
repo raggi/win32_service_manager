@@ -11,3 +11,6 @@ PROJ.email = 'raggi@rubyforge.org'
 PROJ.url = 'http://github.com/raggi/win32_service_manager'
 PROJ.rubyforge.name = 'libraggi'
 PROJ.version = Win32ServiceManager.version
+
+desc 'cleanup and rebuild everything'
+task :full => %w(clean clobber manifest:create gem:spec gem doc)
